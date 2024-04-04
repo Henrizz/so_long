@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:03:37 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/01 19:47:25 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/04/04 13:43:00 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,16 @@ void	free_field(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < game->height)
+	if (game->field != NULL)
 	{
-		free(game->field[i]);
-		game->field[i] = NULL;
-		i++;
+		while (i < game->height)
+		{
+			free(game->field[i]);
+			game->field[i] = NULL;
+			i++;
+		}
+		free(game->field);
+		game->field = NULL;
 	}
 }
 

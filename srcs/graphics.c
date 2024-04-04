@@ -19,20 +19,15 @@ int	transfer_graphics(t_game *game, t_graphics *graphics)
 	graphics->width = 45;
 	graphics->height = 45;
 	graphics->collectible = mlx_xpm_file_to_image(game->mlx, "images/bottle_45.xpm", &(graphics->width), &(graphics->height));
-	//if (graphics->collectible == NULL)
-	//	return (1);
 	graphics->wall = mlx_xpm_file_to_image(game->mlx, "images/wall_45.xpm", &(graphics->width), &(graphics->height));
-	//if (graphics->wall == NULL)
-	//	return (1);
 	graphics->floor = mlx_xpm_file_to_image(game->mlx, "images/floor_45.xpm", &(graphics->width), &(graphics->height));
-	//if (graphics->floor == NULL)
-	//	return (1);
 	graphics->player = mlx_xpm_file_to_image(game->mlx, "images/player_45.xpm", &(graphics->width), &(graphics->height));
-	//if (graphics->player == NULL)
-	//	return (1);
 	graphics->exit = mlx_xpm_file_to_image(game->mlx, "images/home_45.xpm", &(graphics->width), &(graphics->height));
-	//if (graphics->exit == NULL)
-	//	return (1);
+	if (graphics->exit == NULL || graphics->collectible == NULL || graphics->wall == NULL || graphics->player == NULL)
+	{
+		free_images(game, graphics);
+		return (1);
+	}
 	return (0);
 }
 

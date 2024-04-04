@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:31:55 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/01 19:53:30 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/04/04 13:22:36 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	make_window(t_game *game)
 	if (transfer_graphics(game, &graphics) == 1)
 	{
 		ft_printf("Error\nFailed to load images");
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
 	display_graphics(game, &graphics);
-    mlx_key_hook(game->win, &key_hook, &game);
-	mlx_hook(game->win, 17, 0, &close_button, &game);
+    mlx_key_hook(game->win, key_hook, &game);
+	mlx_hook(game->win, 17, 0, close_button, &game);
 	ft_printf("test3\n");
 	mlx_loop(game->mlx);
 }
@@ -57,7 +57,7 @@ int	main(void)
 	
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Hiiiii theeeere!");
-	//game.img = mlx_new_image(game.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	game.img = mlx_new_image(game.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	game.img = mlx_xpm_file_to_image(game.mlx, "images/aqua_cross.xpm", &game.width, &game.height );
 	if (!game.img)
 	{
@@ -67,9 +67,9 @@ int	main(void)
 	game.addr = mlx_get_data_addr(game.img, &game.bits_per_pixel, &game.line_length,
 								&game.endian);
 	//edited_mlx_pixel_put(&game, 5, 5, 0x00FF0000);
-	//draw_circle(&game, 400, 250, 100, 0x00FF0000);
+	draw_circle(&game, 400, 250, 100, 0x00FF0000);
 	//draw_rainbow(&game);
-	mlx_put_image_to_window(game.mlx, game.win, game.img, 0, 0);
+	//mlx_put_image_to_window(game.mlx, game.win, game.img, 0, 0);
 	mlx_hook(game.win, 17, 0, &close_button, &game); // Close button event
     	mlx_key_hook(game.win, &key_hook, &game);
 	mlx_loop(game.mlx);
