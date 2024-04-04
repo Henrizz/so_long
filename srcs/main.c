@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:31:55 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/04 13:22:36 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:38:55 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	
+	//t_graphics graphics;
+
 	if (argc != 2)
 	{
 		ft_printf("Error\nNo valid argument");
@@ -30,20 +31,20 @@ int	main(int argc, char **argv)
 
 void	make_window(t_game *game)
 {
-	t_graphics graphics;
-	
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width * 45, game->height * 45, "Going home from 42 after a long day of coding - THE GAME");
 	
-	if (transfer_graphics(game, &graphics) == 1)
+	if (transfer_graphics(game) == 1)
 	{
 		ft_printf("Error\nFailed to load images");
 		exit(EXIT_FAILURE);
 	}
-	display_graphics(game, &graphics);
-    mlx_key_hook(game->win, key_hook, &game);
-	mlx_hook(game->win, 17, 0, close_button, &game);
-	ft_printf("test3\n");
+	display_graphics(game);
+	ft_printf("graphics collectible pointer after display call: %p\n", (void *)game->graphics.collectible);
+    mlx_key_hook(game->win, key_hook, game);
+    ft_printf("graphics collectible pointer after key hook: %p\n", (void *)game->graphics.collectible);
+	mlx_hook(game->win, 17, 0, close_button, game);
+	ft_printf("graphics collectible pointer after mlx hook: %p\n", (void *)game->graphics.collectible);
 	mlx_loop(game->mlx);
 }
 

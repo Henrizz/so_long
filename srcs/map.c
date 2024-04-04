@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:03:37 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/04 13:43:00 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:03:39 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void	free_field(t_game *game)
 			game->field[i] = NULL;
 			i++;
 		}
-		free(game->field);
-		game->field = NULL;
 	}
 }
 

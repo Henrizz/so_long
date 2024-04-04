@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 17:54:29 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/04 13:26:50 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:23:18 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int key_hook(int keycode, t_game *data, t_graphics *graphics)
 {
 	ft_printf("Key pressed: %d\n", keycode);
+	ft_printf("graphics collectible pointer inside key hook: %p\n", (void *)graphics->collectible);
 	if (keycode == 65307) // 65307 is the keycode for the Escape key on Linux, 53 on Mac
         {
 		ft_printf("Escape key pressed\n");
