@@ -1,0 +1,20 @@
+1. parse the map, decide height + width
+2. check for validity : rectangular shape, walls all around, valid paths, only one character, one exit, 
+	--> Error no valid map
+----	a. file name with .ber extrnsion?
+----	c. check rectangular --> check that all the rows and all the colums correspond to height + width
+----	d. check surrounded by walls (first + last row and first + last columns only 1)
+----	e. check if all elements are there
+	f. check if path is playable (not less than size of 3)
+	--> FLOOD FILL: 
+	a. make fill function with recursion inside: 
+	- if position out of bounds, return
+	- if position is already filled or if it's not target, return 
+	- mark position as checked 
+	- call same fill function for position up, down, left, right
+	b. flood fill function with start position, call fill function 
+3. transfer map into game structure --> allocate memory for amount of lines + get next line into 2dimensional array
+
+TO DO 
+1. handle maximum screen size for map maximum lines and rows 
+2. make function to determine image width + height 

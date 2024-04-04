@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printoutfunctions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:10:46 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/03/27 16:29:57 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/03/30 18:16:45 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

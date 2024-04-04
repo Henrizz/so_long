@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:31:55 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/03/27 18:22:54 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:53:30 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,31 @@ int	main(int argc, char **argv)
 		ft_printf("Error\nNo valid argument");
 		exit(EXIT_SUCCESS);
 	} 
-	read_map(argv[1], &game);
-	return (0);	
+	get_map(argv[1], &game);
+	make_window(&game);
+	return (0);
 }
+
+void	make_window(t_game *game)
+{
+	t_graphics graphics;
+	
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, game->width * 45, game->height * 45, "Going home from 42 after a long day of coding - THE GAME");
+	
+	if (transfer_graphics(game, &graphics) == 1)
+	{
+		ft_printf("Error\nFailed to load images");
+		exit(EXIT_SUCCESS);
+	}
+	display_graphics(game, &graphics);
+    mlx_key_hook(game->win, &key_hook, &game);
+	mlx_hook(game->win, 17, 0, &close_button, &game);
+	ft_printf("test3\n");
+	mlx_loop(game->mlx);
+}
+
+//void	close_function(t_game *game)
 
 
 /*
@@ -52,5 +74,4 @@ int	main(void)
     	mlx_key_hook(game.win, &key_hook, &game);
 	mlx_loop(game.mlx);
 	return (0);
-}
-*/
+}*/
