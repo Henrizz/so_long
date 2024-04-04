@@ -6,7 +6,7 @@
 /*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:10:43 by Henriette         #+#    #+#             */
-/*   Updated: 2024/04/04 13:39:41 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:02:59 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,30 @@ int	flood_fill(t_game *game)
 		free(checker[i]);
 		i++;
 	}
+	free(checker);
 	return (path);
 }
 
 void	initialize_checker(char ***checker, t_game *game)
 {
 	int	row;
+	int	i;
 	
 	*checker = ft_calloc(game->height, sizeof(char *));
 	if (!(*checker))
 		return;
 	row = 0;
+	i = 0;
 	while (row < game->height)
 	{
-		(*checker)[row] = ft_calloc(game->width + 1, sizeof(char *));
+		(*checker)[row] = ft_calloc(game->width + 1, sizeof(char));
 		if (!(*checker)[row])
 		{
+			while (i < row)
+			{
+				free((*checker)[i]);
+				i++;
+			}
 			free(*checker);
 			*checker = NULL;
 			return;

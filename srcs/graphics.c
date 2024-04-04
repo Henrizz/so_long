@@ -16,10 +16,6 @@
 
 int	transfer_graphics(t_game *game)
 {	
-	ft_printf("Before transfer:\n");
-	ft_printf("game pointer: %p\n", (void *)game);
-    ft_printf("graphics collectible pointer: %p\n", (void *)game->graphics.collectible);
-    ft_printf("graphics pointer: %p\n", game->graphics);
 	game->graphics.width = 45;
 	game->graphics.height = 45;
 	game->graphics.collectible = mlx_xpm_file_to_image(game->mlx, "images/bottle_45.xpm", &(game->graphics.width), &(game->graphics.height));
@@ -30,12 +26,8 @@ int	transfer_graphics(t_game *game)
 	if (game->graphics.exit == NULL || game->graphics.collectible == NULL || game->graphics.wall == NULL || game->graphics.player == NULL)
 	{
 		free_images(game);
-		ft_printf("are null condition:\n");
-    ft_printf("graphics collectible pointer: %p\n", (void *)game->graphics.collectible);
 		return (1);
 	}
-	ft_printf("after transfer:\n");
-    ft_printf("graphics collectible pointer: %p\n", (void *)game->graphics.collectible);
 	return (0);
 }
 
