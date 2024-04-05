@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:10:43 by Henriette         #+#    #+#             */
-/*   Updated: 2024/04/04 17:02:59 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:00:44 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	find_p(t_game *game, int *start_y, int *start_x)
 	{
 		while (cols < game->width)
 		{
-			if (game->field[rows][cols] == 'P')
+			if (game->field[rows][cols] == 'P' || game->field[rows][cols] == 'H')
 			{
 				*start_y = rows;
 				*start_x = cols;	

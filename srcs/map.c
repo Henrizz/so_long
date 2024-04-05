@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:03:37 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/04 16:03:39 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:32:57 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	check_rectangle(t_game *game)
 	int	i;
 
 	i = 0;
+	game->coins_found = 0;
 	while (i < game->height)
 	{
 		if ((int)ft_strlen(game->field[i]) != game->width + 1)

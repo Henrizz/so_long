@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:09:44 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/04 16:38:15 by hzimmerm         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:35:01 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 500
 
-# define RIGHT 0
-# define LEFT 1
-# define UP 2
-# define DOWN 3
+# define RIGHT 124
+# define LEFT 123
+# define UP 126
+# define DOWN 125
+# define ESC 53
 
 typedef struct s_graphics {
 	void	*wall;
@@ -31,6 +32,7 @@ typedef struct s_graphics {
 	void	*player;
 	void	*collectible;
 	void	*exit;
+	void	*player_on_house;
 	int	height;
 	int	width;
 }			t_graphics;
@@ -51,6 +53,7 @@ typedef struct s_game {
 	char **field;
 	int	row;
 	int	col;
+	int	coins_found;
 	t_graphics	graphics;
 }				t_game;
 
@@ -79,5 +82,11 @@ int	invalid_comp(t_game *game, int *rows, int *cols, int *p, int *e);
 void	make_window(t_game *game);
 int	transfer_graphics(t_game *game);
 void	display_graphics(t_game *game);
+int	update_player_position(int keycode, t_game *game);	
+int	move_up(t_game *game, int *row, int *col);
+int	move_down(t_game *game, int *row, int *col);
+int	move_left(t_game *game, int *row, int *col);
+int	move_right(t_game *game, int *row, int *col);
+
 
 # endif

@@ -23,7 +23,8 @@ int	transfer_graphics(t_game *game)
 	game->graphics.floor = mlx_xpm_file_to_image(game->mlx, "images/floor_45.xpm", &(game->graphics.width), &(game->graphics.height));
 	game->graphics.player = mlx_xpm_file_to_image(game->mlx, "images/player_45.xpm", &(game->graphics.width), &(game->graphics.height));
 	game->graphics.exit = mlx_xpm_file_to_image(game->mlx, "images/home_45.xpm", &(game->graphics.width), &(game->graphics.height));
-	if (game->graphics.exit == NULL || game->graphics.collectible == NULL || game->graphics.wall == NULL || game->graphics.player == NULL)
+	game->graphics.player_on_house = mlx_xpm_file_to_image(game->mlx, "images/player_on_house.xpm", &(game->graphics.width), &(game->graphics.height));
+	if (game->graphics.exit == NULL || game->graphics.collectible == NULL || game->graphics.wall == NULL || game->graphics.player == NULL || game->graphics.player_on_house == NULL)
 	{
 		free_images(game);
 		return (1);
@@ -52,6 +53,8 @@ void	display_graphics(t_game *game)
 				mlx_put_image_to_window(game->mlx, game->win, game->graphics.collectible, j * 45, i * 45);
 			if (game->field[i][j] == 'E')
 				mlx_put_image_to_window(game->mlx, game->win, game->graphics.exit, j * 45, i * 45);
+			//if (game->field[i][j] == 'H')
+				//mlx_put_image_to_window(game->mlx, game->win, game->graphics.player_on_house, j * 45, i * 45);
 			j++;
 		}
 		i++;
