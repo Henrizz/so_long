@@ -6,7 +6,7 @@
 /*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:09:44 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/05 11:35:01 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/04/05 12:44:16 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_graphics {
 	int	width;
 }			t_graphics;
 
-
 typedef struct s_game {
 	void *mlx;
    	void *win;
@@ -51,9 +50,8 @@ typedef struct s_game {
 	int	height;
 	int	width;
 	char **field;
-	int	row;
-	int	col;
 	int	coins_found;
+	int moves_count;
 	t_graphics	graphics;
 }				t_game;
 

@@ -6,7 +6,7 @@
 /*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 17:54:29 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/05 11:27:11 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/04/05 12:44:22 by Henriette        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,23 @@ int	update_player_position(int keycode, t_game *game)
 {
 	int	row;
 	int	col;
+	int count;
 	
 	row = 0;
 	col = 0;
+	count = 0;
 	find_p(game, &row, &col);
 	if (keycode == UP)
-		move_up(game, &row, &col);
+		count = move_up(game, &row, &col);
 	if (keycode == DOWN)
-		move_down(game, &row, &col);
+		count = move_down(game, &row, &col);
 	if (keycode == LEFT)
-		move_left(game, &row, &col);
+		count = move_left(game, &row, &col);
 	if (keycode == RIGHT)
-		move_right(game, &row, &col);
+		count = move_right(game, &row, &col);
+	if (count == 0)	
+		game->moves_count++;
+	ft_printf("Moves: %d", game->moves_count);	
 	return (0);
 }
 	/*if (keycode == UP && game->field[row - 1][col] != '1' && game->field[row - 1][col] != 'E')
