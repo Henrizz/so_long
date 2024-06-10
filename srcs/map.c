@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:03:37 by hzimmerm          #+#    #+#             */
-/*   Updated: 2024/04/05 12:44:32 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/10 16:26:47 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
-#include "../headers/ft_printf.h"
-#include "../headers/get_next_line.h"
+#include "../includes/so_long.h"
 
 void	get_map(char *map, t_game *game)
 {
-	int	fd;
+	int		fd;
 	char	*read_m;
-	
+
 	fd = open(map, O_RDWR);
 	if (fd == -1)
 	{
@@ -42,7 +40,7 @@ void	get_map(char *map, t_game *game)
 		exit(EXIT_FAILURE);
 }
 
-int	check_map(t_game *game, char* map)
+int	check_map(t_game *game, char *map)
 {
 	int	i;
 	int	fd;
@@ -60,9 +58,10 @@ int	check_map(t_game *game, char* map)
 		game->field[i] = get_next_line(fd);
 		i++;
 	}
-	if (check_name(map) == 1 || check_components(game) == 1 || check_rectangle(game)
-		|| check_surrounding(game) == 1 || flood_fill(game) == 1)
-	{	
+	if (check_name(map) == 1 || check_components(game) == 1 
+		|| check_rectangle(game) || check_surrounding(game) == 1 
+		|| flood_fill(game) == 1)
+	{
 		free_field(game);
 		return (1);
 	}
@@ -88,29 +87,28 @@ void	free_field(t_game *game)
 int	check_surrounding(t_game *game)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	//ft_printf("height: %d, width: %d", game->height, game->width);
 	while (i < game->height)
 	{
-		//ft_printf("i: %d", i);
-		if ((game->field[i][0]) != '1' || game->field[i][game->width - 1] != '1')
+		if ((game->field[i][0]) != '1' 
+			|| game->field[i][game->width - 1] != '1')
 		{
 			ft_printf("Error\nwall is not all around map");
 			return (1);
 		}
 		i++;
 	}
-	while (j < game->width)
+	i = 0;
+	while (i < game->width)
 	{
-		if ((game->field[0][j]) != '1' || game->field[game->height - 1][j] != '1')
+		if ((game->field[0][i]) != '1' 
+			|| game->field[game->height - 1][i] != '1')
 		{
 			ft_printf("Error\nwall is not all around map");
 			return (1);
 		}
-		j++; 
+		i++; 
 	}
 	return (0);
 }
@@ -131,83 +129,5 @@ int	check_rectangle(t_game *game)
 		}
 		i++;
 	}
-	return (0);
-}
-
-int	check_name(char *name)
-{
-	int	i;
-	
-	i = 0;
-	while (name[i])
-	{
-		if (name[i] == '.' && name[i + 1] == 'b' && name[i + 2] == 'e' && name[i + 3] == 'r')
-			return (0);
-		i++;
-	}
-	ft_printf("Error\nno valid map format");
-	return (1);
-}
-
-int	check_components(t_game *game)
-{
-	int	rows;
-	int	cols;
-	int	p;
-	int	e;
-
-	rows = 0;
-	cols = 0;
-	e = 0;
-	p = 0;
-	game->coins_map = 0;
-	while (rows < game->height)
-	{
-		while (cols < game->width)
-		{
-			if (invalid_comp(game, &rows, &cols, &p, &e) == 1)
-				return (1);
-			/*if (game->field[rows][cols] == 'P')
-				p++;
-			if (game->field[rows][cols] == 'C')
-				game->coins_map++;
-			if (game->field[rows][cols] == 'E')
-				e++;
-			if (game->field[rows][cols] != '1' && game->field[rows][cols] != '0'
-				&& game->field[rows][cols] != 'P' && game->field[rows][cols] != 'C'
-				&& game->field[rows][cols] != 'E' && game->field[rows][cols] != '\n' && game->field[rows][cols] != '\0')
-				{
-					ft_printf("Error\ninvalid components");
-					return(1);
-				}	*/
-			cols++;
-		//ft_printf("cols: %d, rows: %d, e: %d, c: %d, p: %d", cols, rows, e, c, p);
-		}
-		cols = 0;
-		rows++;
-	}
-	if (p != 1 || e != 1 || game->coins_map < 1)
-	{
-		ft_printf("Error\ninvalid amount of elements");
-		return(1);
-	}
-	return (0);
-}
-
-int	invalid_comp(t_game *game, int *rows, int *cols, int *p, int *e)
-{
-	if (game->field[*rows][*cols] == 'P')
-				(*p)++;
-			if (game->field[*rows][*cols] == 'C')
-				game->coins_map++;
-			if (game->field[*rows][*cols] == 'E')
-				(*e)++;
-			if (game->field[*rows][*cols] != '1' && game->field[*rows][*cols] != '0'
-				&& game->field[*rows][*cols] != 'P' && game->field[*rows][*cols] != 'C'
-				&& game->field[*rows][*cols] != 'E' && game->field[*rows][*cols] != '\n' && game->field[*rows][*cols] != '\0')
-				{
-					ft_printf("Error\ninvalid components");
-					return(1);
-				}	
 	return (0);
 }

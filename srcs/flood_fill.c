@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Henriette <Henriette@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hzimmerm <hzimmerm@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:10:43 by Henriette         #+#    #+#             */
-/*   Updated: 2024/04/05 11:00:44 by Henriette        ###   ########.fr       */
+/*   Updated: 2024/06/10 16:26:19 by hzimmerm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h"
-#include "../headers/ft_printf.h"
-#include "../headers/get_next_line.h"
+#include "../includes/so_long.h"
 
 int	flood_fill(t_game *game)
 {
-	int	row;
-	int	col;
-	char **checker;
-	int	path;
+	int		row;
+	int		col;
+	char	**checker;
+	int		path;
 
 	checker = NULL;
 	row = 0;
@@ -28,30 +26,37 @@ int	flood_fill(t_game *game)
 	game->coins_path = 0;
 	initialize_checker(&checker, game);
 	find_p(game, &row, &col);
-	if (fill_rec(game, row, col, checker) == 1 && game->coins_map != game->coins_path)
-	{	
+	if (fill_rec(game, row, col, checker) == 1 
+		&& game->coins_map != game->coins_path)
+	{
 		path = 1;
 		ft_printf("Error\nno valid path");
 	}
-	//ft_printf("\npath coins: %d, map coins: %d", game->coins_path, game->coins_map);
-	int i = 0;
+	free_checker(game, checker);
+	return (path);
+}
+
+void	free_checker(t_game *game, char **checker)
+{
+	int	i;
+
+	i = 0;
 	while (i < game->height)
 	{
 		free(checker[i]);
 		i++;
 	}
 	free(checker);
-	return (path);
 }
 
 void	initialize_checker(char ***checker, t_game *game)
 {
 	int	row;
 	int	i;
-	
+
 	*checker = ft_calloc(game->height, sizeof(char *));
 	if (!(*checker))
-		return;
+		return ;
 	row = 0;
 	i = 0;
 	while (row < game->height)
@@ -66,14 +71,14 @@ void	initialize_checker(char ***checker, t_game *game)
 			}
 			free(*checker);
 			*checker = NULL;
-			return;
+			return ;
 		}
 		row++;
 	}
 }
 
 int	fill_rec(t_game *game, int rows, int cols, char **checker)
-{	
+{
 	int	e;
 
 	e = 0;
@@ -81,7 +86,6 @@ int	fill_rec(t_game *game, int rows, int cols, char **checker)
 		return (1);
 	if (game->field[rows][cols] == '1' || checker[rows][cols] == 'F')
 		return (1);
-	//ft_printf("%c", (game->field[rows][cols]));
 	if (game->field[rows][cols] == 'C')
 		game->coins_path++;
 	if (game->field[rows][cols] == 'E')
@@ -107,11 +111,12 @@ void	find_p(t_game *game, int *start_y, int *start_x)
 	{
 		while (cols < game->width)
 		{
-			if (game->field[rows][cols] == 'P' || game->field[rows][cols] == 'H')
+			if (game->field[rows][cols] == 'P' 
+				|| game->field[rows][cols] == 'H')
 			{
 				*start_y = rows;
-				*start_x = cols;	
-				return;
+				*start_x = cols;
+				return ;
 			}
 			cols++;
 		}
